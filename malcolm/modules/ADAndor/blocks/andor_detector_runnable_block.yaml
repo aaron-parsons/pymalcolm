@@ -29,7 +29,7 @@
     prefix: $(pvPrefix):CAM
 
 - ADAndor.parts.AndorDriverPart:
-    name: DRV
+    name: andor_addetector
     mri: $(mriPrefix):DRV
     readoutTime: 13e-3
 

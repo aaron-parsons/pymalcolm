@@ -19,7 +19,7 @@
     prefix: $(pvPrefix)
 
 - xmap.parts.XmapDriverPart:
-    name: DRV
+    name: xmapMca
     mri: $(mriPrefix)-DRV
 
 - ADCore.blocks.stats_plugin_block:
