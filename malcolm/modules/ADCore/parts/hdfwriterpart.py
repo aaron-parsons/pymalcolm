@@ -155,6 +155,8 @@ class HDFWriterPart(StatefulChildPart):
             # But make sure we flush in this round of frames
             n_frames_between_flushes = min(
                 steps_to_do, n_frames_between_flushes)
+        # TODO Why is this line here? Experiment with deleting it.
+        n_frames_between_flushes = max(10, n_frames_between_flushes)
         futures += child.put_attribute_values_async(dict(
             xml=self.layout_filename,
             flushDataPerNFrames=n_frames_between_flushes,
