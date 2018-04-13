@@ -257,6 +257,13 @@ self.make_proxy("localhost:8080", "HELLO")
 print self.block_view("HELLO").greet("me")
 """ % (locals_d["self"].mri_list,)
 
+    locals_d["self"].block_view(
+        "BL18I-ML-PANDA-01:COUNTER1").outDatasetName.put_value("Iref")
+    locals_d["self"].block_view(
+        "BL18I-ML-PANDA-01:COUNTER2").outDatasetName.put_value("I0")
+    locals_d["self"].block_view(
+        "BL18I-ML-PANDA-01:COUNTER3").outDatasetName.put_value("It")
+
     try:
         import IPython
     except ImportError:
