@@ -14,6 +14,8 @@ class Xspress3DriverPart(ExposureDetectorDriverPart):
             steps_per_row = steps_to_do
         fs = child.put_attribute_values_async(dict(
             pointsPerRow=steps_per_row,
+            storeNDAttributes=True,
+            hdfNDArrayPort="XSP3.stat",
             # TODO: this goes in config
             triggerMode="Hardware"))
         fs += super(Xspress3DriverPart, self).setup_detector(

@@ -18,3 +18,17 @@
     pv: $(prefix):PointsPerRow
     rbvSuff: _RBV
     widget: textinput
+
+- ca.parts.CABooleanPart:
+    name: storeNDAttributes
+    description: Whether to save NDAttributes in HDF file or not
+    pv: $(prefix):HDF5:StoreAttr
+    rbvSuff: _RBV
+    widget: checkbox
+
+- ca.parts.CAStringPart:
+    name: hdfNDArrayPort
+    description: HDF plugin NDArray input port
+    pv: $(prefix):HDF5:NDArrayPort
+    rbvSuff: _RBV
+    widget: textinput

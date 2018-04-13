@@ -60,7 +60,8 @@ class StatsPluginPart(StatefulChildPart):
         child = context.block_view(self.params.mri)
         fs = child.put_attribute_values_async(dict(
             enableCallbacks=True,
-            computeStatistics=True))
+            computeStatistics=True,
+            inp="XSP3.POS"))
         xml = self._make_attributes_xml()
         self.attributes_filename = os.path.join(
             params.fileDir, "%s-attributes.xml" % self.params.mri)
