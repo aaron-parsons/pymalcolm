@@ -189,7 +189,7 @@ class PmacTrajectoryPart(StatefulChildPart):
         # update_completed_steps come in
         traj_end = len(self.completed_steps_lookup)
         try:
-            child.when_value_matches("pointsScanned", traj_end, timeout=0.1)
+            child.when_value_matches("pointsScanned", traj_end, timeout=1)
         except TimeoutError:
             raise ValueError("PMAC %r didn't report %s steps in time" % (
                 self.params.mri, traj_end))
