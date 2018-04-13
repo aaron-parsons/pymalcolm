@@ -257,6 +257,13 @@ self.make_proxy("localhost:8080", "HELLO")
 print self.block_view("HELLO").greet("me")
 """ % (locals_d["self"].mri_list,)
 
+    locals_d["self"].block_view(
+        "I08-PANDA01:COUNTER1").outDatasetName.put_value("I0")
+
+    def set_xmap_exposure(exp, self=locals_d["self"]):
+        self.block_view("I08-PANDA01:PULSE1").width.put_value(exp)
+    locals_d["set_xmap_exposure"] = set_xmap_exposure
+
     try:
         import IPython
     except ImportError:
