@@ -3,7 +3,7 @@
 - parameters.string:
     name: configDir
     description: Where to store saved configs
-    default: /tmp/malcolm
+    default: /dls_sw/i18/epics/malcolm
 
 - blocks.xspress3.Xspress3DetectorManager:
     pvPrefix: BL18I-EA-XSP3-01
@@ -24,23 +24,27 @@
     det: I18-XSP3
     brick: I18-BRICK06
     pandabox: I18-PANDA01
+    configDir: $(configDir)
 
 - blocks.demo.I18FineThetaManager:
     mri: I18-SCANFT
     det: I18-XSP3
     brick: I18-BRICK06
     pandabox: I18-PANDA01
+    configDir: $(configDir)
 
 - blocks.demo.I18Table03Manager:
     mri: I18-SCAN03
     det: I18-XSP3
     brick: I18-BRICK06
     pandabox: I18-PANDA01
+    configDir: $(configDir)
 
 - blocks.demo.I18T3FTManager:
     mri: I18-SCAN03FT
     det: I18-XSP3
     brick: I18-BRICK06
     pandabox: I18-PANDA01
+    configDir: $(configDir)
 
 - comms.pva.PvaServerComms:

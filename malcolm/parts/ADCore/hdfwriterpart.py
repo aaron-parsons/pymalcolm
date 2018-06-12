@@ -176,7 +176,7 @@ class HDFWriterPart(ChildPart):
             # But make sure we flush in this round of frames
             n_frames_between_flushes = min(
                 steps_to_do, n_frames_between_flushes)
-        n_frames_between_flushes = max(2, n_frames_between_flushes)
+        n_frames_between_flushes = max(10, n_frames_between_flushes)
         task.put(self.child["flushDataPerNFrames"], n_frames_between_flushes)
         task.put(self.child["flushAttrPerNFrames"], n_frames_between_flushes)
         # Start the plugin

@@ -1,4 +1,9 @@
 - parameters.string:
+    name: configDir
+    description: Where to store saved configs
+    default: /dls_sw/i18/epics/malcolm
+
+- parameters.string:
     name: mri
     description: MRI for created block
 
@@ -17,7 +22,7 @@
 - controllers.RunnableController:
     mri: $(mri)
     axesToMove: [table_x, sc_sample_thetafine]
-    configDir: /tmp/malcolm
+    configDir: $(configDir)
 
 - parts.ADCore.DatasetTablePart:
     name: DSET

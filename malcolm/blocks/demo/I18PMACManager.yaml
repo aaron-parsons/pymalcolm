@@ -1,10 +1,15 @@
 - parameters.string:
+    name: configDir
+    description: Where to store saved configs
+    default: /dls_sw/i18/epics/malcolm
+
+- parameters.string:
     name: mriPrefix
     description: MRI for created block
 
 - controllers.RunnableController:
     mri: $(mriPrefix)
-    configDir: /tmp/malcolm
+    configDir: $(configDir)
 
 - includes.pmac.compoundmotor_collection:
     mri: I18-T1-Y
