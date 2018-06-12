@@ -96,3 +96,4 @@ class DetectorDriverPart(StatefulChildPart):
     def abort(self, context):
         child = context.block_view(self.params.mri)
         child.stop()
+        context.sleep(0.5)
