@@ -30,11 +30,11 @@ class I08ScanCombinedPart(RunnableChildPart):
             # move to corrected centre of range
             xp = (xstop + xstart) / 2.0
             yp = (ystop + ystart) / 2.0
-            xp += 0.0075 * yp
-            yp += 0.0075 * xp
-	    fs = task.put_async(self.child["positionT1XC"], xp)
-	    fs += task.put_async(self.child["positionT1YC"], yp)
-	    task.wait_all(fs)
+            xp += 0.00125 * yp
+            yp += 0.00125 * xp
+            fs = task.put_async(self.child["positionT1XC"], xp)
+            fs += task.put_async(self.child["positionT1YC"], yp)
+            task.wait_all(fs)
         super(I08ScanCombinedPart, self).configure(
             task, completed_steps, steps_to_do, part_info, params)
 
