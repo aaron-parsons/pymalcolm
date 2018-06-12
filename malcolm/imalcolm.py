@@ -49,6 +49,7 @@ def make_process():
     # set terminal title
     sys.stdout.write("\x1b]0;%s\x07" % proc_name)
 
+
     if args.client:
         if args.client.startswith("ws://"):
             from malcolm.comms.websocket import WebsocketClientComms
@@ -56,6 +57,82 @@ def make_process():
             comms = WebsocketClientComms(
                 proc, dict(hostname=hostname, port=int(port)))
             proc.add_comms(comms)
+
+    log_config = {
+        "version": 1,
+        "disable_existing_loggers": False,
+
+        "formatters": {
+            "simple": {
+                "format": "%(name)s: %(message)s"
+            },
+            "extended": {
+                "format": "%(asctime)s - %(levelname)6s - %(name)s\n"
+                          "    %(message)s"
+            },
+        },
+
+        "handlers": {
+            "console": {
+                "class": "logging.StreamHandler",
+                "level": "WARNING",
+                "formatter": "simple",
+                "stream": "ext://sys.stdout"
+            },
+
+            # "local_file_handler": {
+            #     "class": "logging.handlers.RotatingFileHandler",
+            #     "level": "DEBUG",
+            #     "formatter": "extended",
+            #     "filename": "/tmp/debug.log",
+            #     "maxBytes": 100048576,
+            #     "backupCount": 4,
+            #     "encoding": "utf8"
+            # },
+
+            "graylog_gelf": {
+                "class": "pygelf.GelfTcpHandler",
+                # Obviously a DLS-specific configuration: the graylog server
+                # address and port
+                "host": "graylog2.diamond.ac.uk",
+                "port": 12202,
+                "debug": True,
+                "level": "DEBUG",
+                #  The following custom fields will be disabled if setting this
+                # False
+                "include_extra_fields": True,
+                "username": getpass.getuser(),
+                "pid": os.getpid()
+            }
+        },
+
+
+        # "loggers": {
+        #     # Fine-grained logging configuration for individual modules or
+        #     # classes
+        #     # Use this to set different log levels without changing 'real' code.
+        #     "myclasses": {
+        #         "level": "DEBUG",
+        #         "propagate": True
+        #     },
+        #     "usermessages": {
+        #         "level": "INFO",
+        #         "propagate": True,
+        #         "handlers": ["console"]
+        #     }
+        # },
+
+        "root": {
+            "level": "DEBUG",
+            "handlers": ["graylog_gelf", "console"],
+        }
+    }
+
+    if args.logcfg:
+        with open(args.logcfg) as f:
+            text = f.read()
+        if args.logcfg.endswith(".json"):
+            file_config = json.loads(text)
         else:
             raise ValueError(
                 "Don't know how to create client to %s" % args.client)
