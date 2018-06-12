@@ -373,6 +373,7 @@ class Controller(Loggable):
         # Wait for them all to finish
         return_dict = {}
         start = time.time()
+        self.log.debug("%s: waiting for %d runners", hook_queue.hook_name, len(hook_runners))
         while hook_runners:
             part, ret = hook_queue.get()
             hook_runner = hook_runners.pop(part)
