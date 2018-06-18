@@ -23,7 +23,6 @@
     mri: $(mriPrefix)-DRV
     readoutTime: 5e-5
 
-
 - ADCore.blocks.stats_plugin_block:
     mri: $(mriPrefix)-STAT
     prefix: $(pvPrefix):STAT
