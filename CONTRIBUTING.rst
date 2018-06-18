@@ -19,6 +19,7 @@ To get the source source code and run the unit tests, run::
     $ cd pymalcolm
     $ virtualenv --no-site-packages -p /path/to/python2.7 venv27
     $ . venv27/bin/activate
+    $ pip install 'pip>=9.0.1'
     $ pip install -r requirements/test.txt
     $ pytest tests
 
@@ -70,7 +71,4 @@ Before a new release, please go through the following checklist:
 * Bump version in malcolm/version.py
 * Add a release note in CHANGELOG.rst
 * Git tag the version
-* Upload to pypi::
-
-    make publish
-
+* Push to github and travis will make a release on pypi

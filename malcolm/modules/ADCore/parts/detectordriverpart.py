@@ -32,7 +32,7 @@ class DetectorDriverPart(StatefulChildPart):
     @RunnableController.ReportStatus
     def report_configuration(self, context):
         child = context.block_view(self.params.mri)
-        infos = [UniqueIdInfo(child.arrayCounter.value)]
+        infos = [UniqueIdInfo(child.arrayCounterReadback.value)]
         return infos
 
     @RunnableController.Configure
@@ -45,8 +45,8 @@ class DetectorDriverPart(StatefulChildPart):
         child = context.block_view(self.params.mri)
         fs = self.setup_detector(child, completed_steps, steps_to_do, params)
         context.wait_all_futures(fs)
-        self.done_when_reaches = child.arrayCounter.value + steps_to_do
-        self.completed_offset = completed_steps - child.arrayCounter.value
+        self.done_when_reaches = child.arrayCounterReadback.value + steps_to_do
+        self.completed_offset = completed_steps - child.arrayCounterReadback.value
         if self.is_hardware_triggered(child):
             # Start now if we are hardware triggered
             self.start_future = child.start_async()
@@ -61,8 +61,12 @@ class DetectorDriverPart(StatefulChildPart):
         else:
             # Leave the arrayCounter where it is, just start from here
             values = {}
+
+        # Not all areaDetector drivers support the imageMode of Multiple
+        if "Multiple" in child.imageMode.meta.choices:
+            values.update(dict(imageMode="Multiple"))
+
         values.update(dict(
-            imageMode="Multiple",
             numImages=steps_to_do,
             arrayCallbacks=True))
         fs = child.put_attribute_values_async(values)
@@ -76,7 +80,7 @@ class DetectorDriverPart(StatefulChildPart):
     @RunnableController.Resume
     def run(self, context, update_completed_steps):
         child = context.block_view(self.params.mri)
-        child.arrayCounter.subscribe_value(
+        child.arrayCounterReadback.subscribe_value(
             self.update_completed_steps, update_completed_steps)
         if not self.is_hardware_triggered(child):
             # Start now
@@ -86,7 +90,7 @@ class DetectorDriverPart(StatefulChildPart):
         # update_completed_steps come in
         try:
             child.when_value_matches(
-                "arrayCounter", self.done_when_reaches, timeout=5.0)
+                "arrayCounterReadback", self.done_when_reaches, timeout=5.0)
         except TimeoutError:
             raise ValueError("Detector %r didn't produce %s frames in time" % (
                 self.params.mri, self.done_when_reaches))
