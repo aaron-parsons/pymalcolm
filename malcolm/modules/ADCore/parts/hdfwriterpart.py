@@ -142,6 +142,8 @@ class HDFWriterPart(StatefulChildPart):
             file_dir, "%s-layout.xml" % self.params.mri)
         with open(self.layout_filename, "w") as f:
             f.write(xml)
+        # Store the duration of the generator for checking for timeout
+        self.generator_duration = params.generator.duration
         # We want the HDF writer to flush this often:
         flush_time = 1  # seconds
         # (In particular this means that HDF files can be read cleanly by
@@ -213,7 +215,7 @@ class HDFWriterPart(StatefulChildPart):
             self.update_completed_steps, update_completed_steps)
         # TODO: what happens if we miss the last frame?
         child.when_value_matches(
-            "uniqueId", self.done_when_reaches, event_timeout=FRAME_TIMEOUT)
+            "uniqueId", self.done_when_reaches, event_timeout=FRAME_TIMEOUT+self.generator_duration)
 
     @RunnableController.PostRunReady
     def post_run_ready(self, context):
