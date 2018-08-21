@@ -41,7 +41,7 @@ TRIG_LIVE_FRAME = 3  # Capture 0, Frame 1, Detector 1
 TRIG_ZERO = 8        # Capture 0, Frame 0, Detector 0
 
 # How many profile points to write each time
-PROFILE_POINTS = 10000
+PROFILE_POINTS = 20000
 
 # All possible PMAC CS axis assignment
 cs_axis_names = list("ABCUVWXYZ")
