@@ -16,6 +16,7 @@ class Xspress3DriverPart(ExposureDetectorDriverPart):
             pointsPerRow=steps_per_row,
             storeNDAttributes=True,
             hdfNDArrayPort="XSP3.stat",
+            statNDArrayPort="XSP3.POS",
             # TODO: this goes in config
             triggerMode="Hardware"))
         fs += super(Xspress3DriverPart, self).setup_detector(

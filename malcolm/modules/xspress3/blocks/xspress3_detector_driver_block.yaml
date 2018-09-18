@@ -32,3 +32,10 @@
     pv: $(prefix):HDF5:NDArrayPort
     rbvSuff: _RBV
     widget: textinput
+
+- ca.parts.CAStringPart:
+    name: statNDArrayPort
+    description: Stat plugin NDArray input port
+    pv: $(prefix):STAT:NDArrayPort
+    rbvSuff: _RBV
+    widget: textinput
