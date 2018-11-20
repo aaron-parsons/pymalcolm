@@ -53,7 +53,7 @@ class TestPMACTrajectoryPart(ChildTestCase):
 
     def make_part_info(self, x_pos=0.5, y_pos=0.0, units="mm"):
         part_info = dict(
-            xpart=[MotorInfo(
+            x=[MotorInfo(
                 cs_axis="A",
                 cs_port="CS1",
                 acceleration=2.5,
@@ -65,7 +65,7 @@ class TestPMACTrajectoryPart(ChildTestCase):
                 velocity_settle=0.0,
                 units=units
             )],
-            ypart=[MotorInfo(
+            y=[MotorInfo(
                 cs_axis="B",
                 cs_port="CS1",
                 acceleration=2.5,

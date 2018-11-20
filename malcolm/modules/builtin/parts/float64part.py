@@ -5,7 +5,7 @@ from malcolm.core import Part, PartRegistrar, NumberMeta, APartName, \
 from ..util import set_tags, AWriteable, AConfig, AGroup, AWidget
 
 with Anno("Initial value of the created attribute"):
-    Value = float
+    AValue = float
 
 
 class Float64Part(Part):
@@ -17,7 +17,7 @@ class Float64Part(Part):
                  config=1,  # type: AConfig
                  group=None,  # type: AGroup
                  widget=None,  # type: AWidget
-                 value=0.0,  # type: Value
+                 value=0.0,  # type: AValue
                  ):
         # type: (...) -> None
         super(Float64Part, self).__init__(name)
