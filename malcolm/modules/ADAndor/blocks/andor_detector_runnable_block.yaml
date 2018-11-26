@@ -31,7 +31,7 @@
 - ADAndor.parts.AndorDriverPart:
     name: andor_addetector
     mri: $(mriPrefix):DRV
-    readoutTime: 30e-3 #13e-3
+    readoutTime: 13e-3
 
 - ADCore.blocks.stats_plugin_block:
     mri: $(mriPrefix):STAT
