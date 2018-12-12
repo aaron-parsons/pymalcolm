@@ -35,6 +35,7 @@
 - ADCore.parts.ExposureDeadtimePart:
     name: DEADTIME
     initial_readout_time: 1e-3
+    initial_frequency_accuracy: 10000
 
 - ADCore.blocks.stats_plugin_block:
     mri: $(mri_prefix):STAT

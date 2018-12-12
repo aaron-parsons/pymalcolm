@@ -70,7 +70,7 @@ class DetectorDriverPart(ChildPart):
         # in some detectors
         if exposure_info:
             child = context.block_view(self.mri)
-            child.acquirePeriod.put_value(generator.duration)
+            child.acquirePeriod.put_value(kwargs["exposure"])
         if self.is_hardware_triggered:
             # Start now if we are hardware triggered
             self.actions.arm_detector(context)
