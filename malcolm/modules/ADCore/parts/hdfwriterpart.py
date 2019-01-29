@@ -327,7 +327,8 @@ class HDFWriterPart(builtin.parts.ChildPart):
         futures += child.put_attribute_values_async(dict(
             xml=self.layout_filename,
             flushDataPerNFrames=n_frames_between_flushes,
-            flushAttrPerNFrames=n_frames_between_flushes))
+            flushAttrPerNFrames=n_frames_between_flushes,
+            cacheFramesPerChunk=n_frames_between_flushes))
         # Wait for the previous puts to finish
         context.wait_all_futures(futures)
         # Reset numCapture back to 0
