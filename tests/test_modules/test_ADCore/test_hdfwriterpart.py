@@ -155,7 +155,6 @@ class TestHDFWriterPart(ChildTestCase):
             call.put('posNameDimN', 'd1'),
             call.put('posNameDimX', 'd0'),
             call.put('posNameDimY', ''),
-            call.put('cacheFramesPerChunk', 10.0),
             call.put('flushAttrPerNFrames', 10.0),
             call.put('flushDataPerNFrames', 10.0),
             call.put('xml', expected_xml_filename),
